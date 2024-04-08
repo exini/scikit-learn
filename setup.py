@@ -48,12 +48,8 @@ import sklearn
 
 VERSION = sklearn.__version__
 
-if platform.python_implementation() == 'PyPy':
-    SCIPY_MIN_VERSION = '1.1.0'
-    NUMPY_MIN_VERSION = '1.14.0'
-else:
-    SCIPY_MIN_VERSION = '0.19.1'
-    NUMPY_MIN_VERSION = '1.13.3'
+NUMPY_VERSION = '1.22.0'
+SCIPY_VERSION = '1.10.0'
 
 JOBLIB_MIN_VERSION = '0.11'
 THREADPOOLCTL_MIN_VERSION = '2.0.0'
@@ -76,8 +72,8 @@ if SETUPTOOLS_COMMANDS.intersection(sys.argv):
         include_package_data=True,
         extras_require={
             'alldeps': (
-                'numpy >= {}'.format(NUMPY_MIN_VERSION),
-                'scipy >= {}'.format(SCIPY_MIN_VERSION),
+                'numpy == {}'.format(NUMPY_VERSION),
+                'scipy == {}'.format(SCIPY_VERSION),
             ),
         },
     )
@@ -256,8 +252,8 @@ def setup_package():
                     cmdclass=cmdclass,
                     python_requires=">=3.6",
                     install_requires=[
-                        'numpy>={}'.format(NUMPY_MIN_VERSION),
-                        'scipy>={}'.format(SCIPY_MIN_VERSION),
+                        'numpy=={}'.format(NUMPY_VERSION),
+                        'scipy=={}'.format(SCIPY_VERSION),
                         'joblib>={}'.format(JOBLIB_MIN_VERSION),
                         'threadpoolctl>={}'.format(THREADPOOLCTL_MIN_VERSION)
                     ],
@@ -289,9 +285,9 @@ def setup_package():
                 " Python version is %s installed in %s."
                 % (platform.python_version(), sys.executable))
 
-        check_package_status('numpy', NUMPY_MIN_VERSION)
+        check_package_status('numpy', NUMPY_VERSION)
 
-        check_package_status('scipy', SCIPY_MIN_VERSION)
+        check_package_status('scipy', SCIPY_VERSION)
 
         from numpy.distutils.core import setup
 
