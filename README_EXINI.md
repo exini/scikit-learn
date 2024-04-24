@@ -18,6 +18,5 @@ $ python setup.py bdist_wheel -d dist/
 ```
 from the base folder.
 
-Upload new package version to release to aws. If version is x.y.z, upload wheel to
- 
-s3://dev-deploy-exiniaws-com/pet-analysis-service/packages/scikit-learn/x.y.z/
+Upload new package version to release to aws. If version is x.y.z, upload wheel to aws.
+For location see pattern in image-analysis.
