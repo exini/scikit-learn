@@ -31,7 +31,7 @@ SOLVE_TRIANGULAR_ARGS = {'check_finite': False}
 
 @_deprecate_positional_args
 def lars_path(X, y, Xy=None, *, Gram=None, max_iter=500, alpha_min=0,
-              method='lar', copy_X=True, eps=np.finfo(np.float).eps,
+              method='lar', copy_X=True, eps=np.finfo(float).eps,
               copy_Gram=True, verbose=0, return_path=True,
               return_n_iter=False, positive=False):
     """Compute Least Angle Regression or Lasso path using LARS algorithm [1]
@@ -82,7 +82,7 @@ def lars_path(X, y, Xy=None, *, Gram=None, max_iter=500, alpha_min=0,
     eps : float, optional
         The machine-precision regularization in the computation of the
         Cholesky diagonal factors. Increase this for very ill-conditioned
-        systems. By default, ``np.finfo(np.float).eps`` is used.
+        systems. By default, ``np.finfo(float).eps`` is used.
 
     copy_Gram : bool, default=True
         If ``False``, ``Gram`` is overwritten.
@@ -161,7 +161,7 @@ def lars_path(X, y, Xy=None, *, Gram=None, max_iter=500, alpha_min=0,
 
 @_deprecate_positional_args
 def lars_path_gram(Xy, Gram, *, n_samples, max_iter=500, alpha_min=0,
-                   method='lar', copy_X=True, eps=np.finfo(np.float).eps,
+                   method='lar', copy_X=True, eps=np.finfo(float).eps,
                    copy_Gram=True, verbose=0, return_path=True,
                    return_n_iter=False, positive=False):
     """lars_path in the sufficient stats mode [1]
@@ -203,7 +203,7 @@ def lars_path_gram(Xy, Gram, *, n_samples, max_iter=500, alpha_min=0,
     eps : float, optional
         The machine-precision regularization in the computation of the
         Cholesky diagonal factors. Increase this for very ill-conditioned
-        systems. By default, ``np.finfo(np.float).eps`` is used.
+        systems. By default, ``np.finfo(float).eps`` is used.
 
     copy_Gram : bool, default=True
         If ``False``, ``Gram`` is overwritten.
@@ -278,7 +278,7 @@ def lars_path_gram(Xy, Gram, *, n_samples, max_iter=500, alpha_min=0,
 
 def _lars_path_solver(X, y, Xy=None, Gram=None, n_samples=None, max_iter=500,
                       alpha_min=0, method='lar', copy_X=True,
-                      eps=np.finfo(np.float).eps, copy_Gram=True, verbose=0,
+                      eps=np.finfo(float).eps, copy_Gram=True, verbose=0,
                       return_path=True, return_n_iter=False, positive=False):
     """Compute Least Angle Regression or Lasso path using LARS algorithm [1]
 
@@ -331,7 +331,7 @@ def _lars_path_solver(X, y, Xy=None, Gram=None, n_samples=None, max_iter=500,
     eps : float, optional
         The machine-precision regularization in the computation of the
         Cholesky diagonal factors. Increase this for very ill-conditioned
-        systems. By default, ``np.finfo(np.float).eps`` is used
+        systems. By default, ``np.finfo(float).eps`` is used
 
     copy_Gram : bool, default=True
         If ``False``, ``Gram`` is overwritten.
@@ -794,7 +794,7 @@ class Lars(MultiOutputMixin, RegressorMixin, LinearModel):
         systems. Unlike the ``tol`` parameter in some iterative
         optimization-based algorithms, this parameter does not control
         the tolerance of the optimization.
-        By default, ``np.finfo(np.float).eps`` is used.
+        By default, ``np.finfo(float).eps`` is used.
 
     copy_X : bool, default=True
         If ``True``, X will be copied; else, it may be overwritten.
@@ -862,7 +862,7 @@ class Lars(MultiOutputMixin, RegressorMixin, LinearModel):
     @_deprecate_positional_args
     def __init__(self, *, fit_intercept=True, verbose=False, normalize=True,
                  precompute='auto', n_nonzero_coefs=500,
-                 eps=np.finfo(np.float).eps, copy_X=True, fit_path=True,
+                 eps=np.finfo(float).eps, copy_X=True, fit_path=True,
                  jitter=None, random_state=None):
         self.fit_intercept = fit_intercept
         self.verbose = verbose
@@ -1035,7 +1035,7 @@ class LassoLars(Lars):
         systems. Unlike the ``tol`` parameter in some iterative
         optimization-based algorithms, this parameter does not control
         the tolerance of the optimization.
-        By default, ``np.finfo(np.float).eps`` is used.
+        By default, ``np.finfo(float).eps`` is used.
 
     copy_X : bool, default=True
         If True, X will be copied; else, it may be overwritten.
@@ -1118,7 +1118,7 @@ class LassoLars(Lars):
     @_deprecate_positional_args
     def __init__(self, alpha=1.0, *, fit_intercept=True, verbose=False,
                  normalize=True, precompute='auto', max_iter=500,
-                 eps=np.finfo(np.float).eps, copy_X=True, fit_path=True,
+                 eps=np.finfo(float).eps, copy_X=True, fit_path=True,
                  positive=False, jitter=None, random_state=None):
         self.alpha = alpha
         self.fit_intercept = fit_intercept
@@ -1146,7 +1146,7 @@ def _check_copy_and_writeable(array, copy=False):
 def _lars_path_residues(X_train, y_train, X_test, y_test, Gram=None,
                         copy=True, method='lars', verbose=False,
                         fit_intercept=True, normalize=True, max_iter=500,
-                        eps=np.finfo(np.float).eps, positive=False):
+                        eps=np.finfo(float).eps, positive=False):
     """Compute the residues on left-out data for a full LARS path
 
     Parameters
@@ -1209,7 +1209,7 @@ def _lars_path_residues(X_train, y_train, X_test, y_test, Gram=None,
         systems. Unlike the ``tol`` parameter in some iterative
         optimization-based algorithms, this parameter does not control
         the tolerance of the optimization.
-        By default, ``np.finfo(np.float).eps`` is used
+        By default, ``np.finfo(float).eps`` is used
 
 
     Returns
@@ -1321,7 +1321,7 @@ class LarsCV(Lars):
     eps : float, optional
         The machine-precision regularization in the computation of the
         Cholesky diagonal factors. Increase this for very ill-conditioned
-        systems. By default, ``np.finfo(np.float).eps`` is used.
+        systems. By default, ``np.finfo(float).eps`` is used.
 
     copy_X : bool, default=True
         If ``True``, X will be copied; else, it may be overwritten.
@@ -1376,7 +1376,7 @@ class LarsCV(Lars):
     @_deprecate_positional_args
     def __init__(self, *, fit_intercept=True, verbose=False, max_iter=500,
                  normalize=True, precompute='auto', cv=None,
-                 max_n_alphas=1000, n_jobs=None, eps=np.finfo(np.float).eps,
+                 max_n_alphas=1000, n_jobs=None, eps=np.finfo(float).eps,
                  copy_X=True):
         self.max_iter = max_iter
         self.cv = cv
@@ -1539,7 +1539,7 @@ class LassoLarsCV(LarsCV):
     eps : float, optional
         The machine-precision regularization in the computation of the
         Cholesky diagonal factors. Increase this for very ill-conditioned
-        systems. By default, ``np.finfo(np.float).eps`` is used.
+        systems. By default, ``np.finfo(float).eps`` is used.
 
     copy_X : bool, default=True
         If True, X will be copied; else, it may be overwritten.
@@ -1618,7 +1618,7 @@ class LassoLarsCV(LarsCV):
     @_deprecate_positional_args
     def __init__(self, *, fit_intercept=True, verbose=False, max_iter=500,
                  normalize=True, precompute='auto', cv=None,
-                 max_n_alphas=1000, n_jobs=None, eps=np.finfo(np.float).eps,
+                 max_n_alphas=1000, n_jobs=None, eps=np.finfo(float).eps,
                  copy_X=True, positive=False):
         self.fit_intercept = fit_intercept
         self.verbose = verbose
@@ -1686,7 +1686,7 @@ class LassoLarsIC(LassoLars):
         systems. Unlike the ``tol`` parameter in some iterative
         optimization-based algorithms, this parameter does not control
         the tolerance of the optimization.
-        By default, ``np.finfo(np.float).eps`` is used
+        By default, ``np.finfo(float).eps`` is used
 
     copy_X : bool, default=True
         If True, X will be copied; else, it may be overwritten.
@@ -1752,7 +1752,7 @@ class LassoLarsIC(LassoLars):
     @_deprecate_positional_args
     def __init__(self, criterion='aic', *, fit_intercept=True, verbose=False,
                  normalize=True, precompute='auto', max_iter=500,
-                 eps=np.finfo(np.float).eps, copy_X=True, positive=False):
+                 eps=np.finfo(float).eps, copy_X=True, positive=False):
         self.criterion = criterion
         self.fit_intercept = fit_intercept
         self.positive = positive
